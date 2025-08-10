@@ -17,7 +17,12 @@ build/
 .idea/
 docs/_build/
 .vscode
-
+capstone-sentiment-analysis/bin/
+capstone-sentiment-analysis/include/
+capstone-sentiment-analysis/lib/
+capstone-sentiment-analysis-venv/
+*venv/
+*.cfg
 # Coverage reports
 htmlcov/
 .coverage

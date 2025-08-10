@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Sentiment Analysis</title>
+        <meta charset="UTF-8" />
+        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+          <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+         <script src="{{ url_for('static', filename='charts.js') }}"></script>
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <img src="{{ url_for('static', filename='sentimentscope.png') }}" style="width:50%" alt="Sentiment Analysis"> 
+       
+         <title>Sentiment Analysis</title>
+          
     </head>
     <body>
         <form method="POST">
-            <textarea name="user_text" rows="5"></textarea>
-            <input type="submit" value="Analyze Text">
+            <textarea name="user_text" rows="4" cols="50" placeholder="Enter text here" >{{request.form["user_text"]}}</textarea><br><br>
+        <button type="submit" id="analyze" name="action"  value="analyze_sentiment">Analyze Sentiment</button>
+       
         </form>
+        {% if sentiment %}
+       <!-- <div class="results"> -->
+        <div  id="results">
+      <h2>Sentiment Analysis Results</h2> 
+       <!-- <div class="chart-container"> -->
+      <div id='VaderBarChart'  style="width:50%; float:left;" ></div>
+      <div id='CustomScoreGuage' style="width:50%; float:right;" ></div>
+        
+      </div>
+      <script>
+      const sentimentData = {{ sentiment | tojson }};
+      renderScores(sentimentData);
+    </script>
+    {% endif %}
     </body>
 </html>
